@@ -148,34 +148,91 @@ From fixing broken pagination to unifying inconsistent data flows, I enjoy under
   <div class="education-section px-3 px-lg-4 pb-4">
     <h2 class="h3 mb-4">Project</h2>
     <div class="timeline">
+        <div class="timeline-card timeline-card-success card shadow-sm">
+        <div class="card-body">
+          <div class="h5 mb-1">Studium <span class="text-muted h6"></span></div>
+          
+          <br>
+<div class="h5 mb-1"> 소개</div>
+          
+          <div>  스터디움 Studium은 공통의 목표를 설정하고,
+            구성원과 함께 꾸준히 학습할 수 있도록 돕는 목표 기반 스터디 관리 플랫폼입니다!  </div>
+            <br>
+            <div class="h5 mb-1"> 인원</div>
+          
+          <div>  BE팀 5인, FE팀 4인  </div>
+            <br>
+
+<div class="h5 mb-1"> 핵심 기능</div>
+<div> llm을 이용한 퀴즈풀이를 이용한 서바이벌 스터디</div>
+<div> 사용자 행동에 따른 보상 시스템</div>
+<div> 스터디원 끼리 실시간 채팅방</div>
+<div> 카테고리에 따른 스터디 검색 기능</div>
+
+<br>
+<div class="h5 mb-1"> 개인 기여</div>
+<div> 채팅 구현, 아이템 상점 기능 구현</div>
+<br>
+<div class="h5 mb-1">세부내용</div>
+<div>메세지 브로커 선택 Redis pub/sub, List, Stream, Kafka</div>
+<br>
+<div>스터디라는 좁은 주제안에서의 채팅이기 때문에 많은 인원이 모이지 않는 다고 판단(수십명수준으로 예측) , 스트림이나 카프카는 오버엔지니어링이라는 생각이 듦. </div>
+<br>
+<div> 시스템적인 측면에서는 pub/sub이 더 부담없어 보임. 다만, 수신자가 받았는지 아닌지 알 수 없음.(구독이 끊겼을 시 메세지 유실)</div>
+<br>
+ <div>사용자 경험의 측면에서 순서보장이 확실하게 되면 좋겠다는 생각에 Redis List를 선택 </div>
+<br>
+<div>이후 채팅 서버 분리를 고려해보았음. 분리를 위한 코드는 짰지만, 실질적으로 얻는 이득이 적다고 생각해 파기</div>
+<br>
+ <div>이미지 저장 방식 설계</div>
+ <br>
+ <div>사용자들은 활동에 대한 보상으로 포인트를 얻고, 포인트로 장착아이템을 얻을 수 있음. 4개의 파츠: 모자,얼굴, 헤어,상의</div>
+ <br>
+ <div>초기 구상: 각각의 파츠에 대한 이미지는 프론트측에서 관리, 파츠들이 조합된 이미지는 db의 멤버 정보에 저장하고 변경 시, 멤버 테이블의 이미지url만 바뀌는 방식</div>
+ <br>
+ <div>초기 구상의 문제점: 멤버테이블에만 조합된 이미지가 있고, 어떤 조합인지에 대한 정보가 없음.- 멤버가 착용한 아이템이 바뀔때마다 멤버의 이미지가 바뀜. 즉, 같은 이미지였더라도 다른 url이 계속해서 생성. 이미지는 비정형이라 조합을 명시하지 않으면 어떤 이미지인지 알 수 있는 방법X</div>
+<br>
+<div>변경 후 : 각각 파츠의 아이디와 이미지를 저장하는 별도의 테이블 추가, 이미지를 변경할 때 마다 조합 테이블에 있는 조합인지 판별해서 이미지를 멤버 테이블에 삽입</div>
+<br>
+<div>이득: 이미지 url이 바뀔때 마다 새로 생성되지 않음. 손해: 어떤 조합인지 판별하는 과정이 리소스를 많이 잡아먹음.</div>
+<br>
+<div>solving: unique인덱스를 걸어 모자,헤어,얼굴,상의의 순서로 된 경우에 한해 조회 성능을 개선</div>
+<br>
+<div>단점: 파츠가 늘면 DB 자체도 수정될 필요가 있음</div>
+<br>
+<div> experience</div>
+<br>
+<div>
+  이 경험을 통해 단순한 기능 구현을 넘어, 사용자 경험과 시스템 안정성 사이의 균형을 고민하는 중요성을 체감함
+</div>
+<br>
+          <a href="https://github.com/lnvisibledragon/WEB5_6_9to6_BE"> 깃허브 링크</a>
+<br>
+<!--<a href="https://studium.cedartodo.uk">배포서버</a> -->
+
+
+          <div class="text-muted text-small mb-2">2025 06- 2025 08</div>
+        </div>
+      </div>
+
       <div class="timeline-card timeline-card-success card shadow-sm">
         <div class="card-body">
           <div class="h5 mb-1">Moodlink <span class="text-muted h6"></span></div>
+          <div class="h5 mb-1"> 개인 기여</div>
+<div> 채팅 구현, 아이템 상점 기능 구현</div>
+          <br>
           <div> 사용자의 기분에 따라 도서,영화, 음악을추천해주는 서비스  </div>
-          <div href="https://github.com/lnvisibledragon/NBE5-6-2-Team05"> https://github.com/lnvisibledragon/NBE5-6-2-Team05</div>
+          <a href="https://github.com/lnvisibledragon/NBE5-6-2-Team05"> https://github.com/lnvisibledragon/NBE5-6-2-Team05</a>
           <img src="./images/project_info.png" width="80%">
           <br></br>
           <img src="./images/moodlink_des1.png" width="80%">
           <br></br>
           <img src="./images/moodlink_des2.png" width="80%">
-          <div class="text-muted text-small mb-2">2025 - 2025</div>
+          <div class="text-muted text-small mb-2">2025 05 - 2025 06</div>
         </div>
         </div>
         
-        <div class="timeline-card timeline-card-success card shadow-sm">
-        <div class="card-body">
-          <div class="h5 mb-1">Studium <span class="text-muted h6"></span></div>
-          <div> 스터디움 Studium은 공통의 목표를 설정하고,
-            구성원과 함께 꾸준히 학습할 수 있도록 돕는 목표 기반 스터디 관리 플랫폼입니다!
-            출석 체크, 목표 달성, 리워드 시스템, 서바이벌 스터디 등을 통해
-            스터디의 몰입도와 지속성을 높이는 데 중점을 둡니다.  </div>
-          <div href="https://github.com/lnvisibledragon/WEB5_6_9to6_BE"> https://github.com/lnvisibledragon/WEB5_6_9to6_BE</div>
 
-
-          <div class="text-muted text-small mb-2">2025 - 2025</div>
-        </div>
-      
-      </div>
   </div>
 
   <hr class="d-print-none"/>
